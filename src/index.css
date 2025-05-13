@@ -2,9 +2,26 @@
 
 @import "tailwindcss";
 
-#theme{
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
   --font-poppins: Poppins, sans-serif;
+  --font-playwrite: Playwrite Ro, cursive;
+  --font-robotoSlab: Roboto slab, serif;
   --font-comicRelief: Comic Relief, system-ui;
-  --font-roboto-slab: Roboto Slab, serif;
-  --font-playWrite: Playwrite RO, cursive;
+
+  --color-bglight: #f8f9fa;
+  --color-textlight: #212529;
+  --color-cardlight: #ffffff;
+  --color-accentlight: #007bff;
+
+  --color-bgdark: #121212;
+  --color-textdark: #ffffff;
+  --color-carddark: #1e1e1e;
+  --color-accentdark: #0d6efd;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
