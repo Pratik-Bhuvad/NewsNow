@@ -23,7 +23,7 @@ const Header = ({setSearch}) => {
     };
 
     return (
-        <div className='fixed w-screen'>
+        <div className='fixed w-screen z-50'>
             <header className='sticky w-screen h-[10vh] flex justify-between items-center p-4 shadow-md transition-all ease-in-out duration-300 bg-bglight dark:bg-bgdark dark:text-textdark dark:shadow-black'>
                 <div className='text-2xl font-playwrite font-semibold text-textlight dark:text-textdark'>Newsnow</div>
                 <div className='flex items-center space-x-4'>
