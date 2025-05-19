@@ -6,6 +6,7 @@ import { ThemeProvider } from "./Context/ThemeContext"
 import Search from "./Components/Search"
 import { useState } from "react"
 import { NewsProvider } from "./Context/NewsContext"
+import News from "./Pages/News"
 
 function App() {
   const [search, setSearch] = useState(false)
@@ -19,6 +20,8 @@ function App() {
           <main className="w-screen min-h-screen transition-all duration-300 ease-in-out pt-[10vh] bg-bglight text-textlight dark:bg-bgdark dark:text-textdark">
             <Routes>
               <Route path={`/`} element={<Home />} />
+              <Route path={`/trending`} element={<News newstype={'trendingArticle'}/>}/>
+              <Route path={`/news`} element={<News newstype={'newsArticle'}/>}/>
             </Routes>
           </main>
           <Footer />

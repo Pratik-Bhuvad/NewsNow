@@ -43,16 +43,19 @@ const Header = ({setSearch}) => {
                 <nav className='flex flex-col space-y-6 py-6'>
                     <NavLink
                         to='/'
+                        onClick={()=> setSidebar(false)}
                         className={({ isActive }) => `${isActive ? 'text-blue-500 font-bold bg-bgdark' : 'text-gray-700 dark:text-gray-300'} p-2 transition-all duration-200 ease-in-out` } >
                         Home
                     </NavLink>
                     <NavLink
                         to='/trending'
+                        onClick={()=> setSidebar(false)}
                         className={({ isActive }) =>`${isActive ? 'text-blue-500 font-bold bg-bgdark' : 'text-gray-700 dark:text-gray-300'} p-2 transition-all duration-200 ease-in-out`}>
                         Trending
                     </NavLink>
                     <NavLink
                         to='/news'
+                        onClick={()=> setSidebar(false)}
                         className={({ isActive }) =>`${isActive ? 'text-blue-500 font-bold bg-bgdark' : 'text-gray-700 dark:text-gray-300'} p-2 transition-all duration-200 ease-in-out`}>
                         News
                     </NavLink>

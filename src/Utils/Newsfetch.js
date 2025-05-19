@@ -34,3 +34,78 @@ export const getLatestArticles = async (language, country) => {
         throw error;
     }
 }
+
+export const getTrendingArticles = async (language, country) => {
+    try {
+        const response = await axiosClient.get('/top-headlines', {
+            params: {
+                sortBy: 'popularity',
+                language: language || 'en',
+                ...(country ? { country } : {})
+            },
+        });
+        
+        return response.data.articles;
+    }
+    catch (error) {
+        console.error('Error fetching trending articles:', error);
+        throw error;
+    }
+}
+
+export const getNews = async (category, language, country) => {
+    try {
+        if (category !== null) {
+            const response = await axiosClient.get('/top-headlines', {
+                params: {
+                    category,
+                    sortBy: 'popularity',
+                    language: language || 'en',
+                    ...(country ? { country } : {})
+                },
+            });
+            return response.data.articles;
+        }
+        else {
+            return getEverything(language, country);
+        }
+    }
+    catch (error) {
+        console.error('Error fetching news:', error);
+        throw error;
+    }
+}
+
+export const getEverything = async (language, country) => {
+    try {
+        
+        const response = await axiosClient.get('/everything', {
+            params: {
+                q: 'everything',
+                language: language || 'en',
+                ...(country ? { country } : {})
+            },
+        });
+        
+        return response.data.articles;
+    }
+    catch (error) {
+        console.error('Error fetching everything:', error);
+        throw error;
+    }
+}
+
+export const searchNews = async (query) => {
+    try {
+        const response = await axiosClient.get('/everything', {
+            params: {
+                q: query,
+            }
+        });
+        return response.data.articles;
+    }
+    catch (error) {
+        console.error('Error searching news:', error);
+        throw error;
+    }
+}

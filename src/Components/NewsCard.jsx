@@ -14,7 +14,7 @@ const NewsCard = ({ Article, span, desc }) => {
   return (
     <article target='_blank' className='w-full h-fit flex flex-col gap-y-3 pb-3 rounded-lg bg-gray-200/50 dark:bg-carddark'>
       <Link to={Article.url} target='_blank' className='flex flex-col gap-y-3 '>
-        <img src={Article.urlToImage} className='rounded-t-lg w-full object-cover' alt="Image" />
+        <img src={Article.urlToImage} loading='lazy' className='rounded-t-lg w-full object-cover' alt="Image" />
         <h1 className='font-semibold px-2 text-base'>{Article.title}</h1>
         {desc && <p className='px-2 text-justify text-sm'>{Article.description}</p>}
       </Link>
@@ -22,7 +22,7 @@ const NewsCard = ({ Article, span, desc }) => {
         <h2>{Article.source.name}</h2>
         <GoDotFill className='text-xs pt-1' />
         <h2>{date}</h2>
-        <CiBookmark className='absolute right-2 text-lg !text-black' onClick={() => console.log("Bookmark")} />
+        <CiBookmark className='absolute right-2 text-lg !text-black dark:!text-white' onClick={() => console.log("Bookmark")} />
       </div>
     </article>
   )
