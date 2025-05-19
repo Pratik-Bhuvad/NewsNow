@@ -8,7 +8,6 @@ const axiosClient = axios.create({
     },
     params: {
         apiKey: API_KEY,
-        language: 'en',
     },
 })
 
