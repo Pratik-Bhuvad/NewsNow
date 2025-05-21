@@ -68,3 +68,34 @@ export const Categories = [
     Icon: 'FaMicrochip',
   },
 ];
+
+export const countries = [
+  { code: null, name: 'WORLD' },
+  { code: 'us', name: 'USA' },
+  { code: 'fr', name: 'FRANCE' },
+  { code: 'in', name: 'INDIA' },
+  { code: 'ch', name: 'CHINA' },
+  { code: 'jp', name: 'JAPAN' },
+  { code: 'gb', name: 'UNITED KINGDOM' },
+  { code: 'de', name: 'GERMANY' },
+  { code: 'ru', name: 'RUSSIA' },
+  { code: 'au', name: 'AUSTRALIA' },
+  { code: 'ca', name: 'CANADA' },
+  { code: 'br', name: 'BRAZIL' },
+  { code: 'za', name: 'SOUTH AFRICA' },
+];
+
+
+export const Languages = [
+  { code: 'en', name: 'ENGLISH' },
+  { code: 'fr', name: 'FRENCH' },
+  { code: 'hi', name: 'HINDI' },         
+  { code: 'de', name: 'GERMAN' },
+  { code: 'es', name: 'SPANISH' },
+  { code: 'it', name: 'ITALIAN' },
+  { code: 'pt', name: 'PORTUGUESE' },
+  { code: 'ru', name: 'RUSSIAN' },
+  { code: 'zh', name: 'CHINESE' },
+  { code: 'ar', name: 'ARABIC' },
+  { code: 'ja', name: 'JAPANESE' },
+];

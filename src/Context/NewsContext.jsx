@@ -7,6 +7,7 @@ export const NewsProvider = ({ children }) => {
     const [country, setCountry] = useState(null)
     const [language, setLanguage] = useState('en')
     const [category, setCategory] = useState(null)
+    const [searchArticle, setSearchArticle] = useState()
 
     const [featuredArticle, setFeaturedArticle] = useState(null)
     const [latestArticle, setLatestArticle] = useState(null)
@@ -19,7 +20,6 @@ export const NewsProvider = ({ children }) => {
         const fetchNews = async () => {
             try {
                 setLoading(true)
-                
                 const [featuredNews, LatestNews, trendingNews, news] = await Promise.all([
                     getFeaturedArticles(language, country),
                     getLatestArticles(language, country),
@@ -39,10 +39,12 @@ export const NewsProvider = ({ children }) => {
             }
         }
         fetchNews()
-    }, [])
+    }, [category, language, country])
+    
+
 
     return (
-        <NewsContext.Provider value={{ featuredArticle, latestArticle, trendingArticle, newsArticle ,loading, category, setLanguage,setCountry, setCategory }}>
+        <NewsContext.Provider value={{ featuredArticle, latestArticle, trendingArticle, newsArticle ,loading, category, country, language,searchArticle, setSearchArticle, setLanguage,setCountry, setCategory }}>
             {children}
         </NewsContext.Provider>
     )

@@ -2,18 +2,21 @@ import React, { useContext, useState } from 'react';
 import { FaSearch, FaSun, FaMoon, FaBars, FaAngleLeft, FaGlobe, FaLanguage } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import { ThemeContext } from '../Context/ThemeContext';
+import { countries, Languages } from '../Utils/Data';
+import { NewsContext } from '../Context/NewsContext';
 
-const Header = ({setSearch}) => {
+const Header = ({ setSearch }) => {
     const [sidebar, setSidebar] = useState(false)
     const [showRegionSelector, setShowRegionSelector] = useState(false);
     const [showLanguageSelector, setShowLanguageSelector] = useState(false);
-    const [region, setRegion] = useState('US')
-    const [language, setLanguage] = useState('en')
 
-    const { theme, toggleTheme } = useContext(ThemeContext)
+    const { toggleTheme } = useContext(ThemeContext)
+    const { country, language, setCountry, setLanguage } = useContext(NewsContext)
 
     const handleRegionChange = (region) => {
-        setRegion(region);
+        console.log(region);
+        
+        setCountry(region);
         setShowRegionSelector(false);
     };
 
@@ -27,7 +30,7 @@ const Header = ({setSearch}) => {
             <header className='sticky w-screen h-[10vh] flex justify-between items-center p-4 shadow-md transition-all ease-in-out duration-300 bg-bglight dark:bg-bgdark dark:text-textdark dark:shadow-black'>
                 <div className='text-2xl font-playwrite font-semibold text-textlight dark:text-textdark'>Newsnow</div>
                 <div className='flex items-center space-x-4'>
-                    <FaSearch className='cursor-pointer' onClick={() => setSearch(true)}/>
+                    <FaSearch className='cursor-pointer' onClick={() => setSearch(true)} />
                     <button className='' onClick={() => toggleTheme()}>
                         <FaSun className='hidden dark:block' />
                         <FaMoon className='block dark:hidden' />
@@ -43,48 +46,49 @@ const Header = ({setSearch}) => {
                 <nav className='flex flex-col space-y-6 py-6'>
                     <NavLink
                         to='/'
-                        onClick={()=> setSidebar(false)}
-                        className={({ isActive }) => `${isActive ? 'text-blue-500 font-bold bg-bgdark' : 'text-gray-700 dark:text-gray-300'} p-2 transition-all duration-200 ease-in-out` } >
+                        onClick={() => setSidebar(false)}
+                        className={({ isActive }) => `${isActive ? 'text-blue-500 font-bold bg-bgdark' : 'text-gray-700 dark:text-gray-300'} p-2 transition-all duration-200 ease-in-out`} >
                         Home
                     </NavLink>
                     <NavLink
                         to='/trending'
-                        onClick={()=> setSidebar(false)}
-                        className={({ isActive }) =>`${isActive ? 'text-blue-500 font-bold bg-bgdark' : 'text-gray-700 dark:text-gray-300'} p-2 transition-all duration-200 ease-in-out`}>
+                        onClick={() => setSidebar(false)}
+                        className={({ isActive }) => `${isActive ? 'text-blue-500 font-bold bg-bgdark' : 'text-gray-700 dark:text-gray-300'} p-2 transition-all duration-200 ease-in-out`}>
                         Trending
                     </NavLink>
                     <NavLink
                         to='/news'
-                        onClick={()=> setSidebar(false)}
-                        className={({ isActive }) =>`${isActive ? 'text-blue-500 font-bold bg-bgdark' : 'text-gray-700 dark:text-gray-300'} p-2 transition-all duration-200 ease-in-out`}>
+                        onClick={() => setSidebar(false)}
+                        className={({ isActive }) => `${isActive ? 'text-blue-500 font-bold bg-bgdark' : 'text-gray-700 dark:text-gray-300'} p-2 transition-all duration-200 ease-in-out`}>
                         News
                     </NavLink>
 
                     {/* Region Selector */}
-                    <div className='flex items-center space-x-2 relative p-2 cursor-pointer' onClick={() => {setShowRegionSelector(!showRegionSelector), setShowLanguageSelector(false)}}>
+                    <div className='flex items-center space-x-2 relative p-2 cursor-pointer' onClick={() => { setShowRegionSelector(!showRegionSelector), setShowLanguageSelector(false) }}>
                         <FaGlobe className='relative' />
-                        <span>Region: {region}</span>
+                        <span>Region: {countries.find(c => c.code === country)?.name}</span>
                         {showRegionSelector && (
-                            <div className='absolute top-full right-5 bg-bglight shadow-md rounded z-10 *:p-2 *:px-4 *:border-b-[1px] *:border-b-gray-300/50'>
-                                <button className='block w-full text-left p-1 hover:bg-gray-200' onClick={() => handleRegionChange('all')}>WORLD</button>
-                                <button className='block w-full text-left p-1 hover:bg-gray-200' onClick={() => handleRegionChange('US')}>USA</button>
-                                <button className='block w-full text-left p-1 hover:bg-gray-200' onClick={() => handleRegionChange('FR')}>FRANCE</button>
-                                <button className='block w-full text-left p-1 hover:bg-gray-200' onClick={() => handleRegionChange('IN')}>INDIA</button>
-                                <button className='block w-full text-left p-1 hover:bg-gray-200' onClick={() => handleRegionChange('CH')}>CHINA</button>
-                                <button className='block w-full text-left p-1 hover:bg-gray-200' onClick={() => handleRegionChange('JP')}>JAPAN</button>
+                            <div className='h-[35vh] overflow-y-scroll absolute top-full right-5 bg-bglight shadow-md rounded z-10 *:p-2 *:px-4 *:border-b-[1px] *:border-b-gray-300/50'>
+                                {countries.map((c) => (
+                                    <button key={c.code} className='block w-full text-left p-1 hover:bg-gray-200' onClick={() => handleRegionChange(c.code)}>
+                                        {c.name}
+                                    </button>
+                                ))}
                             </div>
                         )}
                     </div>
 
                     {/* Language Selector */}
-                    <div className='flex items-center space-x-2 relative p-2 cursor-pointer' onClick={() => {setShowLanguageSelector(!showLanguageSelector), setShowRegionSelector(false)}}>
+                    <div className='flex items-center space-x-2 relative p-2 cursor-pointer' onClick={() => { setShowLanguageSelector(!showLanguageSelector), setShowRegionSelector(false) }}>
                         <FaLanguage className='relative top-0.5' />
-                        <span>Language: {language}</span>
+                        <span>Language: {Languages.find(l => l.code === language)?.name}</span>
                         {showLanguageSelector && (
-                            <div className='absolute top-full right-5 bg-bglight shadow-md rounded z-10 *:p-2 *:px-4 *:border-b-[1px] *:border-b-gray-300/50'>
-                                <button className='block w-full text-left p-1 hover:bg-gray-200' onClick={() => handleLanguageChange('en')}>ENGLISH</button>
-                                <button className='block w-full text-left p-1 hover:bg-gray-200' onClick={() => handleLanguageChange('FR')}>FR</button>
-                                <button className='block w-full text-left p-1 hover:bg-gray-200' onClick={() => handleLanguageChange('hi')}>HINDI</button>
+                            <div className='h-[35vh] overflow-y-scroll absolute top-full right-5 bg-bglight shadow-md rounded z-10 *:p-2 *:px-4 *:border-b-[1px] *:border-b-gray-300/50'>
+                                {Languages.map((l) => (
+                                    <button key={l.code} className='block w-full text-left p-1 hover:bg-gray-200' onClick={() => handleLanguageChange(l.code)}>
+                                        {l.name}
+                                    </button>
+                                ))}
                             </div>
                         )}
                     </div>

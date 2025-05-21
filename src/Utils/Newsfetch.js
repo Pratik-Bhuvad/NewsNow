@@ -6,7 +6,7 @@ export const getFeaturedArticles = async (language, country) => {
             params: {
                 pageSize: 4,
                 sortBy: 'popularity',
-                language: language || 'en',
+                language: language ,
                 ...(country ? { country } : {})
             },
         });
@@ -24,8 +24,7 @@ export const getLatestArticles = async (language, country) => {
                 q: 'everything',
                 sortBy: 'publishedAt',
                 pageSize: 3,
-                language: language || 'en',
-                ...(country ? { country } : {})
+                language: language ,
             },
         });
         return response.data.articles;
@@ -40,7 +39,7 @@ export const getTrendingArticles = async (language, country) => {
         const response = await axiosClient.get('/top-headlines', {
             params: {
                 sortBy: 'popularity',
-                language: language || 'en',
+                language: language ,
                 ...(country ? { country } : {})
             },
         });
@@ -60,7 +59,7 @@ export const getNews = async (category, language, country) => {
                 params: {
                     category,
                     sortBy: 'popularity',
-                    language: language || 'en',
+                    language: language ,
                     ...(country ? { country } : {})
                 },
             });
@@ -82,8 +81,7 @@ export const getEverything = async (language, country) => {
         const response = await axiosClient.get('/everything', {
             params: {
                 q: 'everything',
-                language: language || 'en',
-                ...(country ? { country } : {})
+                language: language ,
             },
         });
         
