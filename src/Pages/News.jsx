@@ -1,29 +1,45 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CategoriesSection from '../Components/CategoriesSection'
 import { NewsContext } from '../Context/NewsContext'
 import NewsCard from '../Components/NewsCard'
 import NewsCardLoader from '../Components/NewsCardLoader'
+import Pagination from '../Components/Pagination'
+
+const ARTICLES_PER_PAGE = 10;
 
 const News = ({ newstype }) => {
-  let { trendingArticle, newsArticle, loading } = useContext(NewsContext)
-  let Article;
+  const { trendingArticle, newsArticle, loading } = useContext(NewsContext);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  (newstype === 'trendingArticle') ? Article = trendingArticle : Article = newsArticle
+  const allArticles = newstype === 'trendingArticle' ? trendingArticle : newsArticle;
+  const totalItems = allArticles?.length || 0;
+
+  const startIndex = (currentPage - 1) * ARTICLES_PER_PAGE;
+  const currentArticles = allArticles?.slice(startIndex, startIndex + ARTICLES_PER_PAGE);
 
   return (
     <div>
       <CategoriesSection />
-      <section className='grid grid-cols-1 gap-3 px-3 py-2 pb-5'>
-        {!loading && Article ?
-          Article.map((Article, i) => {
-            return <NewsCard key={i} Article={Article} desc={true} />
-          })
+      <section className={`grid grid-cols-1 gap-3 px-3 py-2 pb-5 transition-opacity duration-300 ease-in-out ${loading ? 'opacity-0' : 'opacity-100'}`}>
+        {!loading && currentArticles ?
+          currentArticles.map((article, i) => (
+            <NewsCard key={i} Article={article} desc={true} />
+          ))
           :
-          (Array.from({ length: 6 }).map((_, index) => {
-            return <NewsCardLoader key={index} />
-          }))
+          Array.from({ length: 6 }).map((_, index) => (
+            <NewsCardLoader key={index} />
+          ))
         }
       </section>
+
+      {!loading && totalItems > ARTICLES_PER_PAGE && (
+        <Pagination
+          currentPage={currentPage}
+          totalItems={totalItems}
+          itemsPerPage={ARTICLES_PER_PAGE}
+          onPageChange={setCurrentPage}
+        />
+      )}
     </div>
   )
 }

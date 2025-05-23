@@ -62,6 +62,12 @@ const Header = ({ setSearch }) => {
                         className={({ isActive }) => `${isActive ? 'text-blue-500 font-bold bg-bgdark' : 'text-gray-700 dark:text-gray-300'} p-2 transition-all duration-200 ease-in-out`}>
                         News
                     </NavLink>
+                    <NavLink
+                        to='/bookmark'
+                        onClick={() => setSidebar(false)}
+                        className={({ isActive }) => `${isActive ? 'text-blue-500 font-bold bg-bgdark' : 'text-gray-700 dark:text-gray-300'} p-2 transition-all duration-200 ease-in-out`}>
+                        Bookmark
+                    </NavLink>
 
                     {/* Region Selector */}
                     <div className='flex items-center space-x-2 relative p-2 cursor-pointer' onClick={() => { setShowRegionSelector(!showRegionSelector), setShowLanguageSelector(false) }}>

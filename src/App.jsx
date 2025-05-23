@@ -7,6 +7,8 @@ import Search from "./Components/Search"
 import { useState } from "react"
 import { NewsProvider } from "./Context/NewsContext"
 import News from "./Pages/News"
+import Bookmark from "./Pages/Bookmark"
+import Toast from "./Components/Toast"
 
 function App() {
   const [search, setSearch] = useState(false)
@@ -22,8 +24,10 @@ function App() {
               <Route path={`/`} element={<Home />} />
               <Route path={`/trending`} element={<News newstype={'trendingArticle'}/>}/>
               <Route path={`/news`} element={<News newstype={'newsArticle'}/>}/>
+              <Route path={`/bookmark`} element={<Bookmark/>}/>
             </Routes>
           </main>
+          <Toast />
           <Footer />
         </ThemeProvider>
       </NewsProvider>
