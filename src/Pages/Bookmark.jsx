@@ -35,7 +35,7 @@ const Bookmark = () => {
   const currentBookmarks = bookmarks.slice(startIndex, startIndex + ARTICLES_PER_PAGE);
 
   return (
-    <div className='w-screen p-2'>
+    <div className='w-screen min-h-[50vh] p-2'>
       <h1 className='text-3xl font-extrabold font-poppins leading-snug tracking-wider text-center py-5'>
         Bookmarked News Articles
       </h1>
@@ -51,7 +51,7 @@ const Bookmark = () => {
         </div>
       )}
 
-      <section id="bookmarkArticles" className={`grid grid-cols-1 gap-3 justify-items-center items-center transition-opacity duration-300 ease-in-out ${loading ? 'opacity-0' : 'opacity-100'} `}>
+      <section id="bookmarkArticles" className={`grid grid-cols-1 gap-3 justify-items-center items-center transition-opacity duration-300 ease-in-out ${loading ? 'opacity-0' : 'opacity-100'} md:grid-cols-2`}>
         {
           loading
             ? Array.from({ length: 3 }).map((_, index) => (
@@ -67,7 +67,7 @@ const Bookmark = () => {
                 isInBookmarkPage = {true}
                 />
               ))
-              : <p className="text-center text-gray-500 my-5 text-xl">No bookmarks yet.</p>
+              : <p className="text-center text-gray-500 my-5 text-xl md:col-span-full">No bookmarks yet.</p>
         }
       </section>
 

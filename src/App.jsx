@@ -19,7 +19,7 @@ function App() {
         <ThemeProvider>
           <Header setSearch={setSearch} />
           {search && <Search setSearch={setSearch} />}
-          <main className="w-screen min-h-screen transition-all duration-300 ease-in-out pt-[10vh] bg-bglight text-textlight dark:bg-bgdark dark:text-textdark">
+          <main className="w-screen transition-all duration-300 ease-in-out pt-[10vh] bg-bglight text-textlight dark:bg-bgdark dark:text-textdark">
             <Routes>
               <Route path={`/`} element={<Home />} />
               <Route path={`/trending`} element={<News newstype={'trendingArticle'}/>}/>

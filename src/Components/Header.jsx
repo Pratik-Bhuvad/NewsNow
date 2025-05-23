@@ -15,7 +15,7 @@ const Header = ({ setSearch }) => {
 
     const handleRegionChange = (region) => {
         console.log(region);
-        
+
         setCountry(region);
         setShowRegionSelector(false);
     };
@@ -30,15 +30,71 @@ const Header = ({ setSearch }) => {
             <header className='sticky w-screen h-[10vh] flex justify-between items-center p-4 shadow-md transition-all ease-in-out duration-300 bg-bglight dark:bg-bgdark dark:text-textdark dark:shadow-black'>
                 <div className='text-2xl font-playwrite font-semibold text-textlight dark:text-textdark'>Newsnow</div>
                 <div className='flex items-center space-x-4'>
+                    <nav className='hidden h-full items-center justify-evenly lg:flex lg:*:text-sm '>
+                        <NavLink
+                            to='/'
+                            onClick={() => setSidebar(false)}
+                            className={({ isActive }) => `${isActive ? 'text-blue-500 font-bold bg-bgdark lg:bg-transparent' : 'text-gray-700 dark:text-gray-300'} p-2 transition-all duration-200 ease-in-out`} >
+                            Home
+                        </NavLink>
+                        <NavLink
+                            to='/trending'
+                            onClick={() => setSidebar(false)}
+                            className={({ isActive }) => `${isActive ? 'text-blue-500 font-bold bg-bgdark lg:bg-transparent' : 'text-gray-700 dark:text-gray-300'} p-2 transition-all duration-200 ease-in-out`}>
+                            Trending
+                        </NavLink>
+                        <NavLink
+                            to='/news'
+                            onClick={() => setSidebar(false)}
+                            className={({ isActive }) => `${isActive ? 'text-blue-500 font-bold bg-bgdark lg:bg-transparent' : 'text-gray-700 dark:text-gray-300'} p-2 transition-all duration-200 ease-in-out`}>
+                            News
+                        </NavLink>
+                        <NavLink
+                            to='/bookmark'
+                            onClick={() => setSidebar(false)}
+                            className={({ isActive }) => `${isActive ? 'text-blue-500 font-bold bg-bgdark lg:bg-transparent' : 'text-gray-700 dark:text-gray-300'} p-2 transition-all duration-200 ease-in-out`}>
+                            Bookmark
+                        </NavLink>
+
+                        {/* Region Selector */}
+                        <div className='flex items-center space-x-2 relative p-2 cursor-pointer' onClick={() => { setShowRegionSelector(!showRegionSelector), setShowLanguageSelector(false) }}>
+                            <FaGlobe className='relative' />
+                            <span>Region: {countries.find(c => c.code === country)?.name}</span>
+                            {showRegionSelector && (
+                                <div className='h-[35vh] overflow-y-scroll absolute top-full right-5 bg-bglight shadow-md rounded z-10 *:p-2 *:px-4 *:border-b-[1px] *:border-b-gray-300/50'>
+                                    {countries.map((c) => (
+                                        <button key={c.code} className='block w-full text-left p-1 hover:bg-gray-200' onClick={() => handleRegionChange(c.code)}>
+                                            {c.name}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Language Selector */}
+                        <div className='flex items-center space-x-2 relative p-2 cursor-pointer' onClick={() => { setShowLanguageSelector(!showLanguageSelector), setShowRegionSelector(false) }}>
+                            <FaLanguage className='relative top-0.5' />
+                            <span>Language: {Languages.find(l => l.code === language)?.name}</span>
+                            {showLanguageSelector && (
+                                <div className='h-[35vh] overflow-y-scroll absolute top-full right-5 bg-bglight shadow-md rounded z-10 *:p-2 *:px-4 *:border-b-[1px] *:border-b-gray-300/50'>
+                                    {Languages.map((l) => (
+                                        <button key={l.code} className='block w-full text-left p-1 hover:bg-gray-200' onClick={() => handleLanguageChange(l.code)}>
+                                            {l.name}
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </nav>
                     <FaSearch className='cursor-pointer' onClick={() => setSearch(true)} />
                     <button className='' onClick={() => toggleTheme()}>
                         <FaSun className='hidden dark:block' />
                         <FaMoon className='block dark:hidden' />
                     </button>
-                    <FaBars className='cursor-pointer' onClick={() => setSidebar(true)} />
+                    <FaBars className='cursor-pointer lg:hidden' onClick={() => setSidebar(true)} />
                 </div>
             </header>
-            <div className={`absolute top-0 right-0 w-2/3 h-screen pb-5 backdrop-blur-[2px] border-l-2 transition-all duration-300 ease-in-out ${sidebar ? 'translate-x-0' : 'translate-x-full'} border-l-gray-200/70 bg-gray-200/20 dark:text-textdark`}>
+            <div className={`absolute top-0 right-0 w-2/3 h-screen pb-5 backdrop-blur-[2px] border-l-2 transition-all duration-300 ease-in-out ${sidebar ? 'translate-x-0' : 'translate-x-full'} border-l-gray-200/70 bg-gray-200/20 dark:text-textdark lg:hidden`}>
                 <button className='w-screen h-[10vh] flex items-center gap-x-2 px-2' onClick={() => setSidebar(false)}>
                     <FaAngleLeft className='' />
                     <span>Close Menu</span>

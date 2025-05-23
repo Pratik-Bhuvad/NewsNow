@@ -9,7 +9,7 @@ import {
 } from '../Utils/LocalStorageUtil';
 import { toast } from 'react-toastify';
 
-const NewsCard = ({ Article, desc, onBookmarkRemoved, isInBookmarkPage }) => {
+const NewsCard = ({ Article, desc, span, onBookmarkRemoved, isInBookmarkPage }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   useEffect(() => {
@@ -50,19 +50,27 @@ const NewsCard = ({ Article, desc, onBookmarkRemoved, isInBookmarkPage }) => {
   });
 
   return (
-    <article className='w-full h-fit flex flex-col gap-y-3 pb-3 rounded-lg bg-gray-200/50 dark:bg-carddark'>
-      <Link to={Article.url} target='_blank' className='flex flex-col gap-y-3'>
+    <article className={`w-full h-fit flex flex-col gap-y-3 pb-3 rounded-lg bg-gray-200/50 dark:bg-carddark ${span ? `${span} !h-auto` : ''}`}>
+      <Link to={Article.url} target='_blank' className={`flex flex-col gap-y-3 `}>
         <img
           src={Article.urlToImage || defaultImage}
           alt="Article"
           loading='lazy'
-          className='rounded-t-lg w-full object-cover h-52'
+          className={`rounded-t-lg w-full object-cover h-52 ${span ? 'md:h-auto' : ''}`}
         />
-        <h1 className='font-semibold px-2 text-base'>{Article.title}</h1>
-        {desc && <p className='px-2 text-justify text-sm'>{Article.description}</p>}
+        <h1 className="font-semibold px-2 text-base line-clamp-2 min-h-12">
+          {Article.title}
+        </h1>
+
+        {desc &&
+          <div className='px-2 text-justify text-sm'>
+            <p className='line-clamp-4'>{Article.description}</p>
+             <Link to={Article.url} target='_blank' className='text-xs text-blue-500'>+ Read More</Link>
+          </div>
+        }
       </Link>
 
-      <div className='text-shadow-textlight text-sm opacity-70 px-2 relative flex items-center gap-0.5'>
+      <div className='text-shadow-textlight text-sm opacity-70 px-2 relative flex items-center flex-wrap gap-0.5 md:min-h-10'>
         <h2>{Article.source.name}</h2>
         <GoDotFill className='text-xs pt-1' />
         <h2>{formattedDate}</h2>
@@ -72,7 +80,7 @@ const NewsCard = ({ Article, desc, onBookmarkRemoved, isInBookmarkPage }) => {
           className={`absolute right-2 text-lg p-1 rounded-full transition-colors ${isBookmarked
             ? 'text-white'
             : 'bg-transparent text-black dark:text-white'
-          }`}
+            }`}
         >
           <i className={`fa-bookmark ${isBookmarked ? 'text-blue-700 fa-solid' : 'fa-regular'}`}></i>
         </button>

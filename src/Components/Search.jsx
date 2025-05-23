@@ -19,7 +19,7 @@ const Search = ({setSearch}) => {
 
     return (
         <section className='w-screen h-96 fixed top-1/12 z-50 flex justify-center items-center backdrop-blur-xs text-textlight bg-gray-200/10 dark:bg-gray-800/80'>
-            <div id="searchComponent" className='w-11/12 h-fit rounded-lg py-2 bg-bglight text-textlight dark:bg-bgdark dark:text-textdark *:w-full'>
+            <div id="searchComponent" className='w-11/12 h-fit rounded-lg py-2 bg-bglight text-textlight dark:bg-bgdark dark:text-textdark *:w-full md:w-3/4'>
                 <div className='flex items-center justify-evenly'>
                     <FaSearch></FaSearch>
                     <input type="text" name="search" id="search" value={searchText} onChange={(e) => {setSearchText(e.target.value), setSearchArticle(e.target.value)}}  onKeyDown={handleKeyDown} className='w-4/5 focus:outline-none active:bg-transparent text-textlight dark:text-textdark' placeholder='Search for news, topics, sources...' />

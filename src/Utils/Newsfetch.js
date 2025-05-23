@@ -4,7 +4,7 @@ export const getFeaturedArticles = async (language, country) => {
     try {
         const response = await axiosClient.get('/top-headlines', {
             params: {
-                pageSize: 4,
+                pageSize: 10,
                 sortBy: 'popularity',
                 language: language ,
                 ...(country ? { country } : {})
@@ -23,7 +23,7 @@ export const getLatestArticles = async (language, country) => {
             params: {
                 q: 'everything',
                 sortBy: 'publishedAt',
-                pageSize: 3,
+                pageSize: 10,
                 language: language ,
             },
         });
