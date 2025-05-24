@@ -41,12 +41,12 @@ const Home = () => {
           }
         </div>
       </section>
-      <section className='w-screen py-5 px-2 flex flex-col items-center'>
+      <section className='w-screen py-5 px-2 flex flex-col items-center xl:p-10'>
         <h1 className='font-bold text-2xl font-robotoSlab text-shadow-lg text-shadow-gray-400/50 mb-3 text-start w-full'>Featured Stories</h1>
-        <div className='w-full grid grid-cols-1 gap-4 md:grid-cols-2 md:px-7 lg:grid-cols-3'>
+        <div className='w-full grid grid-cols-1 gap-4 md:grid-cols-2 md:px-7 lg:grid-cols-3 xl:gap-x-10 xl:py-10 xl:w-4/5'>
           {featuredArticle ?
             (featuredArticle.filter(article => article.urlToImage).slice(0,3).map((Article, i) => {
-              return ((Article.urlToImage) && <NewsCard key={i} Article={Article} span={(i === 0) ? 'col-span-full justify-between lg:col-span-2 lg:row-span-2' : ''} desc={(i === 0) ? true : false} />)
+              return ((Article.urlToImage) && <NewsCard key={i} Article={Article} span={(i === 0) ? 'col-span-full justify-between lg:col-span-2 lg:row-span-2' : ''} desc={(i === 0) ? true : false} featured={true} />)
             }))
             :
             (Array.from({ length: 3 }).map((_, index) => {
@@ -58,7 +58,7 @@ const Home = () => {
       </section >
       <section className="w-screen px-2 py-4">
         <h1 className='font-bold text-2xl font-poppins my-4'>Latest Headlines</h1>
-        <div className='w-full grid grid-cols-1 gap-3 px-2 md:grid-cols-3'>
+        <div className='w-full grid grid-cols-1 gap-3 px-2 md:grid-cols-3 xl:px-14 xl:gap-x-8'>
           {
             !loading && latestArticle ?
               latestArticle.filter(article => article.urlToImage).slice(0,3).map((Article, i) => {

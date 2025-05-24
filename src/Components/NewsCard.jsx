@@ -9,7 +9,7 @@ import {
 } from '../Utils/LocalStorageUtil';
 import { toast } from 'react-toastify';
 
-const NewsCard = ({ Article, desc, span, onBookmarkRemoved, isInBookmarkPage }) => {
+const NewsCard = ({ Article, desc, span,featured, onBookmarkRemoved, isInBookmarkPage }) => {
   const [isBookmarked, setIsBookmarked] = useState(false);
 
   useEffect(() => {
@@ -50,8 +50,8 @@ const NewsCard = ({ Article, desc, span, onBookmarkRemoved, isInBookmarkPage }) 
   });
 
   return (
-    <article className={`w-full h-fit flex flex-col gap-y-3 pb-3 rounded-lg bg-gray-200/50 dark:bg-carddark ${span ? `${span} !h-auto` : ''}`}>
-      <Link to={Article.url} target='_blank' className={`flex flex-col gap-y-3 `}>
+    <article className={`w-full h-fit flex flex-col gap-y-3 pb-3 rounded-lg bg-gray-200/50 dark:bg-carddark ${span ? `${span} !h-auto` : ''} xl:h-full`}>
+      <div className={`flex flex-col gap-y-3 `}>
         <img
           src={Article.urlToImage || defaultImage}
           alt="Article"
@@ -68,7 +68,7 @@ const NewsCard = ({ Article, desc, span, onBookmarkRemoved, isInBookmarkPage }) 
              <Link to={Article.url} target='_blank' className='text-xs text-blue-500'>+ Read More</Link>
           </div>
         }
-      </Link>
+      </div>
 
       <div className='text-shadow-textlight text-sm opacity-70 px-2 relative flex items-center flex-wrap gap-0.5 md:min-h-10'>
         <h2>{Article.source.name}</h2>

@@ -8,7 +8,7 @@ const CategoriesSection = () => {
     return (
         <section className="relative w-11/12 mx-auto h-20 flex items-center">
 
-            <div className="absolute left-0 top-0 h-full w-8 z-10 pointer-events-none bg-gradient-to-r from-bglight/80 dark:from-bgdark/80 to-transparent" />
+            <div className="absolute left-0 top-0 h-full w-8 z-10 pointer-events-none bg-gradient-to-r from-bglight/80 dark:from-bgdark/80 to-transparent lg:hidden" />
             
             <div className="relative flex items-center gap-x-2 overflow-x-auto px-2 w-full scrollbar-hide text-sm font-medium text-white *:rounded-3xl *:py-1.5 *:px-3.5 *:transition-all *:duration-300 *:ease-in-out">
                 <span
@@ -31,7 +31,7 @@ const CategoriesSection = () => {
                     ))
                 }
             </div>
-            <div className="absolute right-0 top-0 h-full w-8 z-10 pointer-events-none bg-gradient-to-l from-bglight/80 dark:from-bgdark/80 to-transparent" />
+            <div className="absolute right-0 top-0 h-full w-8 z-10 pointer-events-none bg-gradient-to-l from-bglight/80 dark:from-bgdark/80 to-transparent lg:hidden" />
         </section>
     )
 }

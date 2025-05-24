@@ -20,7 +20,7 @@ const News = ({ newstype }) => {
   return (
     <div>
       <CategoriesSection />
-      <section className={`grid grid-cols-1 gap-3 px-3 py-2 pb-5 transition-opacity duration-300 ease-in-out ${loading ? 'opacity-0' : 'opacity-100'} md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4`}>
+      <section className={`grid grid-cols-1 gap-3 px-3 py-2 pb-5 transition-opacity duration-300 ease-in-out ${loading ? 'opacity-0' : 'opacity-100'} md:grid-cols-2 lg:grid-cols-3 lg:gap-x-5 lg:px-7 2xl:grid-cols-4`}>
         {!loading && currentArticles ?
           currentArticles.map((article, i) => (
             <NewsCard key={i} Article={article} desc={true} />
